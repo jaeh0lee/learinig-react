@@ -2,7 +2,7 @@ import "./ExpensesFilter.css";
 
 const ExpensesFilter = (props) => {
   const filterChangeHandler = (event) => {
-    props.onChangeFileter(event.target.value);
+    props.onChangeFilter(event.target.value);
   };
 
   return (
