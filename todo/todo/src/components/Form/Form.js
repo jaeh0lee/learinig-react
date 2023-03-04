@@ -26,7 +26,7 @@ const Form = (props) => {
         onChange={ChangeHandler}
         value={enteredInput}
       />
-      <button type="submit">클릭</button>
+      <button type="submit">클릭!</button>
     </form>
   );
 };
