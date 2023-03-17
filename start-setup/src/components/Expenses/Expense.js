@@ -1,42 +1,34 @@
-import React from 'react'
-import ExpensiveItem from './ExpensiveItem';
-import './Expense.css'
-import Card from '../UI/Card'
+import React, { useState } from "react";
+import "./Expense.css";
+import Card from "../UI/Card";
+import ExpensesFilter from "../NewExpense/ExpensesFilter";
+import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 
+const Expense = ({ item }) => {
+  const [filterYear, setFilterYear] = useState("2020");
 
-const Expense = () => {
-     
-    const expenses = [
-        {
-          id: 'e1',
-          title: 'Toilet Paper',
-          amount: 94.12,
-          date: new Date(2020, 7, 14),
-        },
-        { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
-        {
-          id: 'e3',
-          title: 'Car Insurance',
-          amount: 294.67,
-          date: new Date(2021, 2, 28),
-        },
-        {
-          id: 'e4',
-          title: 'New Desk (Wooden)',
-          amount: 450,
-          date: new Date(2021, 5, 12),
-        },
-      ];
+  // 상태 끌어올리기
+  const filterChangeHanlder = (selectYear) => {
+    setFilterYear(selectYear);
+  };
+
+  const filterExpenses = item.filter((expense) => {
+    return expense.date.getFullYear().toString() === filterYear;
+  });
 
   return (
-    <Card className='expenses'>
-    <ExpensiveItem 
-     title={expenses[0].title}
-     amount={expenses[0].amount}
-     date={expenses[0].date}
-     />
-     </Card>
-  )
-}
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter
+          filterYear={filterYear}
+          filterChangeHanlder={filterChangeHanlder}
+        />
+        <ExpensesChart expenses={filterExpenses} />
+        <ExpensesList filterExpenses={filterExpenses} />
+      </Card>
+    </div>
+  );
+};
 
-export default Expense
+export default Expense;
